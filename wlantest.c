@@ -38,6 +38,8 @@ static bool test_wext(char *ifname)
 		return false;
 	}
 
+	printf("struct iwreq u.name = %s\n", wrq.u.name);
+
 	return true;
 }
 
@@ -61,10 +63,7 @@ int main(int argc, char** argv)
 		printf("Checking ioctl() SIOCGIWNAME on %s\n", ifname);
 		ret = test_wext(ifname);
 
-		if (ret)
-	                printf("%s ioctl() returns 0 and "
-				"struct iwreq u.name set.\n", ifname);
-		else
+		if (!ret)
 			printf("%s is not a wireless interface\n", ifname);
 
 		free(ifname);
